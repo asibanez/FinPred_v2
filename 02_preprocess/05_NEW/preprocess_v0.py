@@ -43,6 +43,18 @@ def BERT_tokenize_f(strings, **kwargs):
      
     return token_ids, token_types, att_masks   
 
+# Conversion to multilabel
+def to_multilabel_f(labels):
+    multilabels = []
+    for label in labels:
+        if label == 0:
+            multilabels.append(torch.tensor([1,0,0]))
+        elif label == 1:
+            multilabels.append(torch.tensor([0,1,0]))
+        elif label == 2:
+            multilabels.append(torch.tensor([0,0,1]))
+            
+    return multilabels
 
 # %% Data load
 data = pd.read_feather(input_path)
@@ -108,6 +120,10 @@ token_ids, token_types, att_masks = BERT_tokenize_f(test_set['strings'],
 test_set['token_ids'] = token_ids
 test_set['token_types'] = token_types
 test_set['att_masks'] = att_masks
+
+# %% Convert labels to multilabels
+train_set['Y'] = to_multilabel_f(train_set['Y'])
+test_set['Y'] = to_multilabel_f(test_set['Y'])
 
 # %% Reorder outputs
 train_set = train_set[['strings', 'token_ids', 'token_types',
