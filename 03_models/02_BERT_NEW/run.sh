@@ -1,12 +1,12 @@
-INPUT_DIR=C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/05_spy_project_NEWS_v2/00_data/01_preprocessed
-OUTPUT_DIR=C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/05_spy_project_NEWS_v2/00_data/02_runs/00_TEST
+#INPUT_DIR=C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/05_spy_project_NEWS_v2/00_data/01_preprocessed
+#OUTPUT_DIR=C:/Users/siban/Dropbox/BICTOP/MyInvestor/06_model/02_NLP/05_spy_project_NEWS_v2/00_data/02_runs/00_TEST
 
-#INPUT_DIR=/data/users/sibanez/01_MyInvestor_FEARS/00_data/01_preprocessed/00_regression/06_monthly_ERG_NEXT_MONTH
-#OUTPUT_DIR=/data/users/sibanez/01_MyInvestor_FEARS/00_data/02_runs/00_regression/00_BERT/05_ERG/02_TEST_02_NEXT_MONTH
+INPUT_DIR=/data/users/sibanez/03_MyInvestor_NEWS_v2/01_preprocessed
+OUTPUT_DIR=/data/users/sibanez/03_MyInvestor_NEWS_v2/02_runs/00_TEST
 
 MODEL_FILENAME=model_v0.py
 
-python train_test.py \
+python -m ipdb train_test.py \
     --input_dir=$INPUT_DIR \
     --output_dir=$OUTPUT_DIR \
     --model_filename=$MODEL_FILENAME \
@@ -22,12 +22,12 @@ python train_test.py \
     --use_cuda=True \
     \
     --n_epochs=10 \
-    --batch_size_train=100 \
+    --batch_size_train=50 \
     --shuffle_train=False \
     --drop_last_train=False \
     --dev_train_ratio=1 \
-    --train_toy_data=False \
-    --len_train_toy_data=30 \
+    --train_toy_data=True \
+    --len_train_toy_data=100/data/users/sibanez/03_MyInvestor_NEWS_v2/01_preprocessed \
     --lr=2e-5 \
     --wd=1e-6 \
     --dropout=0.2 \
@@ -35,14 +35,14 @@ python train_test.py \
     --save_final_model=True \
     --save_model_steps=True \
     --save_step_cliff=0 \
-    --gpu_ids_train=1 \
+    --gpu_ids_train=0 \
     \
     --test_file=model_test.pkl \
     --model_file=model.pt.40 \
     --batch_size_test=100 \
     --gpu_id_test=0 \
 
-read -p 'EOF'
+#read -p 'EOF'
 
 #--model_name=nlpaueb/legal-bert-small-uncased \
 #--hidden_dim=512 \

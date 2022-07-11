@@ -63,7 +63,7 @@ class NEWS_model(nn.Module):
         
         # Multi-label classifier      
         out = self.bn1(out)                                      # batch_size x h_dim
-        out = self.fc(out)                                       # batch_size x n_lab
+        out = self.fc_out(out)                                   # batch_size x n_lab
         out = self.softmax(out)                                  # batch_size x n_lab
 
         return out
