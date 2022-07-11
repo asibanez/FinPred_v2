@@ -27,7 +27,7 @@ python -m ipdb train_test.py \
     --drop_last_train=False \
     --dev_train_ratio=1 \
     --train_toy_data=True \
-    --len_train_toy_data=100/data/users/sibanez/03_MyInvestor_NEWS_v2/01_preprocessed \
+    --len_train_toy_data=100 \
     --lr=2e-5 \
     --wd=1e-6 \
     --dropout=0.2 \
