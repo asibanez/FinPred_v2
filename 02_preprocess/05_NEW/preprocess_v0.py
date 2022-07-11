@@ -30,7 +30,7 @@ def BERT_tokenize_f(strings, **kwargs):
     bert_tokenizer = AutoTokenizer.from_pretrained(kwargs['model_name'],
                                                    use_fast = True)
     
-    for string in tqdm(strings):
+    for string in tqdm(strings, desc='tokenizing'):
         bert_out = bert_tokenizer(string,
                                   return_tensors = 'pt',
                                   padding = 'max_length',
@@ -46,13 +46,13 @@ def BERT_tokenize_f(strings, **kwargs):
 # Conversion to multilabel
 def to_multilabel_f(labels):
     multilabels = []
-    for label in labels:
+    for label in tqdm(labels, desc='converting labels'):
         if label == 0:
-            multilabels.append(torch.tensor([1,0,0]))
+            multilabels.append(torch.tensor([1,0,0]).float())
         elif label == 1:
-            multilabels.append(torch.tensor([0,1,0]))
+            multilabels.append(torch.tensor([0,1,0]).float())
         elif label == 2:
-            multilabels.append(torch.tensor([0,0,1]))
+            multilabels.append(torch.tensor([0,0,1]).float())
             
     return multilabels
 
